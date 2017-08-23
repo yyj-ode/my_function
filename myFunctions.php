@@ -66,3 +66,21 @@ function array_to_tree3($array,$parent_id_name,$child_id_name,$level_name){
 //$arr2 = array_to_tree3($arr1,$parent_id_name,$child_id_name,$level_name);
 //echo '<br>';echo '<pre>';print_r($arr2);echo '<br>';
 //==================================以上为 array_to_tree3 的例子=========================================
+
+
+/**
+ * 功能:打印数组
+ * @param $array
+ * @return bool
+ */
+function dumpp($array){
+    if(is_array($array)){
+        echo '<pre>';
+        print_r($array);
+        echo '</pre>';
+    }else{
+        return false;
+    }
+}
+
+
