@@ -84,3 +84,40 @@ function dumpp($array){
 }
 
 
+///*
+//  *@通过curl方式获取制定的图片到本地
+//  *@ 完整的图片地址
+//  *@ 要存储的文件名
+// */
+/**
+ * @param string $url 图片的地址
+ * @param string $filename 要保存的图片名
+ * @return bool
+ */
+function getImg($url = "", $filename = "") {
+    if(is_dir(basename($filename))) {
+        echo "The Dir was not exits";
+        return false;
+    }
+    //去除URL连接上面可能的引号
+    $hander = curl_init();
+    $fp = fopen($filename,'wb');
+    curl_setopt($hander,CURLOPT_URL,$url);
+    curl_setopt($hander,CURLOPT_FILE,$fp);
+    $data = [
+        "Referer:http://www.mzitu.com/101322",  //这个是为了防盗链，给一个请求头里的Referer过去
+    ];
+    curl_setopt($hander,CURLOPT_HTTPHEADER,$data);
+    curl_exec($hander);
+    curl_close($hander);
+    fclose($fp);
+    return  true;
+}
+//==================================以下为getImg例子==================================
+//例如：
+//$url = "http://i.meizitu.net/2017/09/28a03.jpg";
+//$filename = './11/asdflak.jpg';
+//getImg($url, $filename);
+//==================================以上为getImg例子==================================
+
+
