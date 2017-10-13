@@ -123,11 +123,12 @@ function getImg($url = "", $filename = "") {
 /**
  * @param $page -> 当前页数
  * @param $count -> 数据总条数
+ * @param $num -> 每页显示的条数
  * @return $width ->当前页前后各要显示多少页
  * @return mixed
  */
-function getPageList($page, $count, $width = 3){
-    $data['count'] = ceil($count/6);    //总页数
+function getPageList($page, $count, $num = 24, $width = 3){
+    $data['count'] = ceil($count/$num);    //总页数
     $data['total'] = $count;    //总数
     $data['current'] = $page;  //当前页
     $data['page'] = [];
@@ -140,7 +141,7 @@ function getPageList($page, $count, $width = 3){
         $data['next'] = $data['count'];
     }
     for($i = $page-$width; $i <= $page+$width; $i++){
-        if( ($i > 0) && ($i < $data['count']) ){
+        if( ($i > 0) && ($i <= $data['count']) ){
             $data['page'][] = $i;
         }
     }
